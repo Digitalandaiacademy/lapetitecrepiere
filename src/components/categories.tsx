@@ -3,27 +3,7 @@
 import { Card } from "@/components/ui/card";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-
-const categories = [
-  {
-    name: "Crêpes",
-    description: "Délicieuses crêpes préparées avec amour",
-    image: "https://images.unsplash.com/photo-1519676867240-f03562e64548?w=500",
-    href: "/menu?category=crêpes"
-  },
-  {
-    name: "Burgers & Snacks",
-    description: "Burgers savoureux et snacks rapides",
-    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500",
-    href: "/menu?category=burgers-snacks"
-  },
-  {
-    name: "Boissons",
-    description: "Boissons fraîches et rafraîchissantes",
-    image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=500",
-    href: "/menu?category=boissons"
-  }
-];
+import { categories } from "@/lib/data";
 
 export function Categories() {
   return (
