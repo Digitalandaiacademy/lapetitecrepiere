@@ -6,8 +6,13 @@ import Link from "next/link";
 
 export function Hero() {
   return (
-    <section className="relative h-[600px] flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-600">
-      <div className="absolute inset-0 bg-black/40" />
+    <section className="relative h-[600px] flex items-center justify-center">
+      <img
+        src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200"
+        alt="Table de restaurant"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      <div className="absolute inset-0 bg-black/60" />
       <div className="relative z-10 text-center text-white px-4">
         <h1 className="text-5xl md:text-7xl font-bold mb-4">
           La Petite Crêpière

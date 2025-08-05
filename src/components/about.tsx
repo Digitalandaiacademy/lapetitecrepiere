@@ -17,11 +17,11 @@ export function About() {
               <p className="text-lg text-brown mb-6">
                 Notre mission est simple : offrir à chaque client une expérience gastronomique unique 
                 où chaque bouchée est véritablement un voyage gustatif. Nous croyons en la qualité, 
-                la fraîcheur et l'amour que nous mettons dans chaque plat que nous servons.
+                la fraîcheur et l&apos;amour que nous mettons dans chaque plat que nous servons.
               </p>
               <p className="text-lg text-brown">
-                Que vous soyez à la recherche d'un petit-déjeuner rapide, d'un déjeuner savoureux 
-                ou d'un dîner délicieux, nous sommes là pour satisfaire vos papilles.
+                Que vous soyez à la recherche d&apos;un petit-déjeuner rapide, d&apos;un déjeuner savoureux
+                ou d&apos;un dîner délicieux, nous sommes là pour satisfaire vos papilles.
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-lg">
