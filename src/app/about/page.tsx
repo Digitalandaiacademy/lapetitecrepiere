@@ -28,7 +28,7 @@ export default function AboutPage() {
               </p>
               <p className="text-lg text-brown mb-6">
                 Notre mission est simple : offrir à chaque client une expérience gastronomique unique 
-                où chaque bouchée est véritablement un voyage gustatif. Nous croyons en la qualité, 
+                où chaque bouchée est véritablement un voyage gustatif. Nous croyons en la qualité,
                 la fraîcheur et l&apos;amour que nous mettons dans chaque plat que nous servons.
               </p>
               <p className="text-lg text-brown">

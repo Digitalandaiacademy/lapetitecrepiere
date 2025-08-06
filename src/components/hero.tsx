@@ -39,7 +39,7 @@ export function Hero() {
             asChild
             size="lg"
             variant="outline"
-            className="border-white text-white hover:bg-white hover:text-orange-600"
+            className="border-white text-white bg-transparent hover:bg-white hover:text-orange-600"
           >
             <Link href="/order">
               Commander Maintenant

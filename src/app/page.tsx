@@ -2,6 +2,7 @@ import { Hero } from "@/components/hero";
 import { FeaturedProducts } from "@/components/featured-products";
 import { Categories } from "@/components/categories";
 import { About } from "@/components/about";
+import { Reviews } from "@/components/reviews";
 
 export default function HomePage() {
   return (
@@ -10,6 +11,7 @@ export default function HomePage() {
       <About />
       <Categories />
       <FeaturedProducts />
+      <Reviews />
     </div>
   );
 }

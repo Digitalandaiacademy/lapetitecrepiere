@@ -3,9 +3,22 @@
 import { Card } from "@/components/ui/card";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { categories } from "@/lib/data";
+import { useEffect, useState } from "react";
+import { useSupabase } from "@/components/providers";
+import type { Category } from "@/lib/types";
 
 export function Categories() {
+  const { supabase } = useSupabase();
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const { data } = await supabase.from("categories").select("*");
+      setCategories(data || []);
+    };
+    fetchCategories();
+  }, [supabase]);
+
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
@@ -19,14 +32,16 @@ export function Categories() {
         </div>
         <div className="grid md:grid-cols-3 gap-8">
           {categories.map((category) => (
-            <Link key={category.name} href={category.href}>
+            <Link key={category.id} href={`/categories/${category.id}`}>
               <Card className="group hover:shadow-lg transition-shadow duration-300 overflow-hidden">
                 <div className="aspect-w-16 aspect-h-9">
-                  <img
-                    src={category.image}
-                    alt={category.name}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+                  {category.image_url && (
+                    <img
+                      src={category.image_url}
+                      alt={category.name}
+                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  )}
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-brown mb-2">{category.name}</h3>
