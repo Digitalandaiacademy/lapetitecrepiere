@@ -2,10 +2,10 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { createContext, useContext, useEffect, useState } from "react";
-import type { User } from "@supabase/supabase-js";
+import type { User, SupabaseClient } from "@supabase/supabase-js";
 
 interface SupabaseContextType {
-  supabase: any;
+  supabase: SupabaseClient;
   user: User | null;
 }
 

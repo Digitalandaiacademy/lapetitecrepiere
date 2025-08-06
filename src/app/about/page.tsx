@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-orange-50">
+    <div className="min-h-screen bg-cream">
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center mb-8">
           <Link href="/">
@@ -29,11 +29,11 @@ export default function AboutPage() {
               <p className="text-lg text-brown mb-6">
                 Notre mission est simple : offrir à chaque client une expérience gastronomique unique 
                 où chaque bouchée est véritablement un voyage gustatif. Nous croyons en la qualité, 
-                la fraîcheur et l'amour que nous mettons dans chaque plat que nous servons.
+                la fraîcheur et l&apos;amour que nous mettons dans chaque plat que nous servons.
               </p>
               <p className="text-lg text-brown">
-                Que vous soyez à la recherche d'un petit-déjeuner rapide, d'un déjeuner savoureux 
-                ou d'un dîner délicieux, nous sommes là pour satisfaire vos papilles.
+                Que vous soyez à la recherche d&apos;un petit-déjeuner rapide, d&apos;un déjeuner savoureux
+                ou d&apos;un dîner délicieux, nous sommes là pour satisfaire vos papilles.
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-lg">
@@ -65,7 +65,7 @@ export default function AboutPage() {
                 <Users className="w-12 h-12 text-orange-600" />
               </div>
               <h3 className="text-xl font-semibold text-brown mb-2">Chef Expert</h3>
-              <p className="text-brown/80">Des années d'expérience dans la création de crêpes parfaites</p>
+              <p className="text-brown/80">Des années d&apos;expérience dans la création de crêpes parfaites</p>
             </div>
             
             <div className="text-center">
@@ -88,7 +88,7 @@ export default function AboutPage() {
           <div className="bg-white p-8 rounded-lg shadow-lg text-center">
             <h2 className="text-2xl font-bold text-brown mb-4">Nous Contacter</h2>
             <p className="text-lg text-brown mb-6">
-              Des questions ou des suggestions ? N'hésitez pas à nous contacter !
+              Des questions ou des suggestions ? N&apos;hésitez pas à nous contacter !
             </p>
             <div className="space-y-4">
               <p className="text-brown">
