@@ -21,6 +21,7 @@ export interface Review {
   id: string;
   user_name: string;
   message: string;
+  rating: number;
   created_at: string;
 }
 

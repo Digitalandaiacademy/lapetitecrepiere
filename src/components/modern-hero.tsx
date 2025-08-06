@@ -1,13 +1,15 @@
 "use client";
 
+import { useState } from "react";
+import { ChevronDown, Star, MapPin, Clock, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, MapPin, Clock, Phone } from "lucide-react";
-import Link from "next/link";
 
-export function Hero() {
+export function ModernHero() {
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background with gradient overlay */}
+      {/* Background Video/Image */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-orange-900/70 via-orange-800/50 to-transparent" />
         <img
@@ -31,19 +33,15 @@ export function Hero() {
             size="lg" 
             className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3"
           >
-            <Link href="/menu">
-              Voir le Menu
-            </Link>
+            Commander Maintenant
           </Button>
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
-                    className="border-white text-white hover:bg-white hover:text-orange-600 px-8 py-3 bg-transparent"
-                  >
-                    <Link href="/order">
-                      Commander Maintenant
-                    </Link>
-                  </Button>
+          <Button 
+            size="lg" 
+            variant="outline" 
+            className="border-white text-white hover:bg-white hover:text-orange-600 px-8 py-3"
+          >
+            Voir le Menu
+          </Button>
         </div>
 
         {/* Info Cards */}
@@ -61,11 +59,11 @@ export function Hero() {
             <p className="text-sm">+237 6XX XXX XXX</p>
           </div>
         </div>
+      </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <ChevronRight className="w-8 h-8 text-white rotate-90" />
-        </div>
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <ChevronDown className="w-8 h-8 text-white" />
       </div>
     </section>
   );

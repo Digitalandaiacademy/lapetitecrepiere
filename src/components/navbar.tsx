@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, Heart, ShoppingCart, Star } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Menu, X, ShoppingCart, Heart, Star } from "lucide-react";
 import { useSupabase } from "@/components/providers";
 import { useCart } from "@/lib/cart-context";
 import type { Category } from "@/lib/types";
@@ -10,8 +10,7 @@ import type { Category } from "@/lib/types";
 export function Navbar() {
   const { supabase, user } = useSupabase();
   const { getTotalItems } = useCart();
-  const [open, setOpen] = useState(false);
-  const [showCategories, setShowCategories] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
   const [likedCount, setLikedCount] = useState(0);
   const [favoritesCount, setFavoritesCount] = useState(0);
@@ -22,14 +21,12 @@ export function Navbar() {
       setCategories(cats || []);
 
       if (user) {
-        // Fetch liked products count
         const { count: likes } = await supabase
           .from("product_likes")
           .select("*", { count: "exact", head: true })
           .eq("user_id", user.id);
         setLikedCount(likes || 0);
 
-        // Fetch favorites count
         const { count: favs } = await supabase
           .from("favorites")
           .select("*", { count: "exact", head: true })
@@ -45,135 +42,161 @@ export function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur shadow-md">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-bold text-orange-600">
-          La Petite Crêpière
-        </Link>
-        <div className="hidden md:flex space-x-4 text-brown items-center">
-          <Link href="/" className="hover:text-orange-600">
-            Accueil
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link href="/" className="text-2xl font-bold text-orange-600">
+            La Petite Crêpière
           </Link>
-          <div className="relative">
-            <button
-              onClick={() => setShowCategories(!showCategories)}
-              className="hover:text-orange-600"
-            >
-              Catégories
-            </button>
-            {showCategories && (
-              <div className="absolute left-0 mt-2 w-40 bg-white shadow-lg rounded-md">
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            <Link href="/" className="text-brown hover:text-orange-600 transition-colors">
+              Accueil
+            </Link>
+
+            {/* Catégories Dropdown */}
+            <div className="relative group">
+              <button className="text-brown hover:text-orange-600 transition-colors">
+                Catégories
+              </button>
+              <div className="absolute left-0 mt-2 w-40 bg-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity">
                 {categories.map((c) => (
                   <Link
                     key={c.id}
                     href={`/categories/${c.id}`}
                     className="block px-4 py-2 hover:bg-orange-50"
-                    onClick={() => setShowCategories(false)}
                   >
                     {c.name}
                   </Link>
                 ))}
               </div>
+            </div>
+
+            <Link href="/menu" className="text-brown hover:text-orange-600 transition-colors">
+              Menu
+            </Link>
+            <Link href="/about" className="text-brown hover:text-orange-600 transition-colors">
+              À propos
+            </Link>
+
+            {/* Icons */}
+            <div className="flex items-center space-x-4">
+              <Link href="/liked" className="relative text-brown hover:text-orange-600">
+                <Heart className="w-5 h-5" />
+                {likedCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {likedCount}
+                  </span>
+                )}
+              </Link>
+
+              <Link href="/favorites" className="relative text-brown hover:text-orange-600">
+                <Star className="w-5 h-5" />
+                {favoritesCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {favoritesCount}
+                  </span>
+                )}
+              </Link>
+
+              <Link href="/order" className="relative text-brown hover:text-orange-600">
+                <ShoppingCart className="w-5 h-5" />
+                {getTotalItems() > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {getTotalItems()}
+                  </span>
+                )}
+              </Link>
+            </div>
+
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors"
+              >
+                Déconnexion
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors"
+              >
+                Se connecter
+              </Link>
             )}
           </div>
-          <Link href="/menu" className="hover:text-orange-600">
-            Menu
-          </Link>
-          <Link href="/about" className="hover:text-orange-600">
-            À propos
-          </Link>
-          
-          {/* Liked Products */}
-          <Link href="/liked" className="flex items-center gap-1 hover:text-orange-600">
-            <Heart className="w-5 h-5" />
-            <span className="text-xs">{likedCount}</span>
-          </Link>
-          
-          {/* Favorites */}
-          <Link href="/favorites" className="flex items-center gap-1 hover:text-orange-600">
-            <Star className="w-5 h-5" />
-            <span className="text-xs">{favoritesCount}</span>
-          </Link>
-          
-          {/* Cart */}
-          <Link href="/order" className="flex items-center gap-1 hover:text-orange-600">
-            <ShoppingCart className="w-5 h-5" />
-            <span className="text-xs">{getTotalItems()}</span>
-          </Link>
 
-          {user ? (
-            <button onClick={handleLogout} className="hover:text-orange-600">
-              Déconnexion
-            </button>
-          ) : (
-            <Link href="/login" className="hover:text-orange-600">
-              Se connecter
-            </Link>
-          )}
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-brown"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
-        <button
-          className="md:hidden text-brown"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle navigation"
-        >
-          <Menu className="h-6 w-6" />
-        </button>
-      </div>
-      {open && (
-        <div className="md:hidden bg-white/95 px-4 pb-4 flex flex-col space-y-2 text-brown">
-          <Link href="/" className="hover:text-orange-600" onClick={() => setOpen(false)}>
-            Accueil
-          </Link>
-          <details>
-            <summary className="cursor-pointer py-2">Catégories</summary>
-            <div className="pl-4 flex flex-col">
-              {categories.map((c) => (
-                <Link
-                  key={c.id}
-                  href={`/categories/${c.id}`}
-                  className="py-1 hover:text-orange-600"
-                  onClick={() => setOpen(false)}
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden py-4 border-t">
+            <div className="flex flex-col space-y-4">
+              <Link href="/" className="text-brown hover:text-orange-600" onClick={() => setIsMenuOpen(false)}>
+                Accueil
+              </Link>
+
+              {/* Catégories */}
+              <details>
+                <summary className="cursor-pointer py-2">Catégories</summary>
+                <div className="pl-4 flex flex-col">
+                  {categories.map((c) => (
+                    <Link
+                      key={c.id}
+                      href={`/categories/${c.id}`}
+                      className="py-1 hover:text-orange-600"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {c.name}
+                    </Link>
+                  ))}
+                </div>
+              </details>
+
+              <Link href="/menu" className="text-brown hover:text-orange-600" onClick={() => setIsMenuOpen(false)}>
+                Menu
+              </Link>
+              <Link href="/about" className="text-brown hover:text-orange-600" onClick={() => setIsMenuOpen(false)}>
+                À propos
+              </Link>
+              <Link href="/liked" className="flex items-center gap-2 text-brown hover:text-orange-600" onClick={() => setIsMenuOpen(false)}>
+                <Heart className="w-5 h-5" /> ({likedCount})
+              </Link>
+              <Link href="/favorites" className="flex items-center gap-2 text-brown hover:text-orange-600" onClick={() => setIsMenuOpen(false)}>
+                <Star className="w-5 h-5" /> ({favoritesCount})
+              </Link>
+              <Link href="/order" className="flex items-center gap-2 text-brown hover:text-orange-600" onClick={() => setIsMenuOpen(false)}>
+                <ShoppingCart className="w-5 h-5" /> ({getTotalItems()})
+              </Link>
+
+              {user ? (
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setIsMenuOpen(false);
+                  }}
+                  className="text-left text-brown hover:text-orange-600"
                 >
-                  {c.name}
+                  Déconnexion
+                </button>
+              ) : (
+                <Link href="/login" className="text-brown hover:text-orange-600" onClick={() => setIsMenuOpen(false)}>
+                  Se connecter
                 </Link>
-              ))}
+              )}
             </div>
-          </details>
-          <Link href="/menu" className="hover:text-orange-600" onClick={() => setOpen(false)}>
-            Menu
-          </Link>
-          <Link href="/about" className="hover:text-orange-600" onClick={() => setOpen(false)}>
-            À propos
-          </Link>
-          <Link href="/liked" className="flex items-center gap-1 hover:text-orange-600" onClick={() => setOpen(false)}>
-            <Heart className="w-5 h-5" />
-            <span className="text-xs">{likedCount}</span>
-          </Link>
-          <Link href="/favorites" className="flex items-center gap-1 hover:text-orange-600" onClick={() => setOpen(false)}>
-            <Star className="w-5 h-5" />
-            <span className="text-xs">{favoritesCount}</span>
-          </Link>
-          <Link href="/order" className="flex items-center gap-1 hover:text-orange-600" onClick={() => setOpen(false)}>
-            <ShoppingCart className="w-5 h-5" />
-            <span className="text-xs">{getTotalItems()}</span>
-          </Link>
-          {user ? (
-            <button
-              onClick={() => {
-                handleLogout();
-                setOpen(false);
-              }}
-              className="text-left hover:text-orange-600"
-            >
-              Déconnexion
-            </button>
-          ) : (
-            <Link href="/login" className="hover:text-orange-600" onClick={() => setOpen(false)}>
-              Se connecter
-            </Link>
-          )}
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </nav>
   );
 }

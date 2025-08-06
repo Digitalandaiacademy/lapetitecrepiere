@@ -9,12 +9,11 @@ import type { Product } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
-export function FeaturedProducts() {
+export function ModernFeaturedProducts() {
   const { supabase } = useSupabase();
   const { addToCart } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [likedProducts, setLikedProducts] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -34,18 +33,6 @@ export function FeaturedProducts() {
     fetchProducts();
   }, [supabase]);
 
-  const toggleLike = (productId: string) => {
-    setLikedProducts(prev => {
-      const newLiked = new Set(prev);
-      if (newLiked.has(productId)) {
-        newLiked.delete(productId);
-      } else {
-        newLiked.add(productId);
-      }
-      return newLiked;
-    });
-  };
-
   return (
     <section className="py-20 bg-gradient-to-b from-white to-cream">
       <div className="container mx-auto px-4">
@@ -59,8 +46,8 @@ export function FeaturedProducts() {
         </div>
 
         {loading ? (
-          <div className="grid md:grid-cols-4 gap-6">
-            {[...Array(8)].map((_, i) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...Array(6)].map((_, i) => (
               <Card key={i} className="animate-pulse">
                 <div className="h-48 bg-gray-200 rounded-t-lg" />
                 <div className="p-4 space-y-2">
@@ -72,7 +59,7 @@ export function FeaturedProducts() {
             ))}
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {products.map((product) => (
               <Card
                 key={product.id}
@@ -95,13 +82,8 @@ export function FeaturedProducts() {
                       size="sm"
                       variant="ghost"
                       className="bg-white/90 hover:bg-white"
-                      onClick={() => toggleLike(product.id)}
                     >
-                      <Heart
-                        className={`w-4 h-4 ${
-                          likedProducts.has(product.id) ? "text-red-500 fill-red-500" : ""
-                        }`}
-                      />
+                      <Heart className="w-4 h-4" />
                     </Button>
                   </div>
                 </div>
