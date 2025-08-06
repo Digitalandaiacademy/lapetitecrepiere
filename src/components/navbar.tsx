@@ -6,6 +6,7 @@ import { Menu, X, ShoppingCart, Heart, Star } from "lucide-react";
 import { useSupabase } from "@/components/providers";
 import { useCart } from "@/lib/cart-context";
 import type { Category } from "@/lib/types";
+import Image from "next/image";
 
 export function Navbar() {
   const { supabase, user } = useSupabase();
@@ -46,9 +47,19 @@ export function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="text-2xl font-bold text-orange-600">
-            La Petite Crêpière
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/img/lapetitecrepiere.png"
+              alt="La Petite Crêpière"
+              width={80}
+              height={40}
+              className="rounded-full"
+            />
+            <span className="text-xl font-bold text-orange-600 hidden sm:inline whitespace-nowrap">
+              La Petite Crêpière
+            </span>
           </Link>
+
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">

@@ -11,7 +11,7 @@ export function Hero() {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-orange-900/70 via-orange-800/50 to-transparent" />
         <img
-          src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1920&h=1080&fit=crop"
+          src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=1920&h=1080&fit=crop"
           alt="Crêperie"
           className="w-full h-full object-cover"
         />
@@ -58,7 +58,7 @@ export function Hero() {
           </div>
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
             <Phone className="w-6 h-6 mx-auto mb-2 text-orange-400" />
-            <p className="text-sm">+237 6XX XXX XXX</p>
+            <p className="text-sm">+237 652 163 848</p>
           </div>
         </div>
 
