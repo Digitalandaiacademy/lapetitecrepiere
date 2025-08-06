@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useSupabase } from "@/components/providers";
 import type { Product } from "@/lib/types";
 import { Button } from "@/components/ui/button";
-import type { Product } from "@/lib/types";
 
 interface CommentType {
   id: string;

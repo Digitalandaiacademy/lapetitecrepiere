@@ -31,7 +31,9 @@ export function Navbar() {
           La Petite Crêpière
         </Link>
         <div className="hidden md:flex space-x-6 text-brown items-center">
-          <Link href="/" className="hover:text-orange-600">Accueil</Link>
+          <Link href="/" className="hover:text-orange-600">
+            Accueil
+          </Link>
           <div className="relative">
             <button
               onClick={() => setShowCategories(!showCategories)}
@@ -54,9 +56,15 @@ export function Navbar() {
               </div>
             )}
           </div>
-          <Link href="/menu" className="hover:text-orange-600">Menu</Link>
-          <Link href="/about" className="hover:text-orange-600">À propos</Link>
-          <Link href="/order" className="hover:text-orange-600">Commander</Link>
+          <Link href="/menu" className="hover:text-orange-600">
+            Menu
+          </Link>
+          <Link href="/about" className="hover:text-orange-600">
+            À propos
+          </Link>
+          <Link href="/order" className="hover:text-orange-600">
+            Commander
+          </Link>
           {user ? (
             <button onClick={handleLogout} className="hover:text-orange-600">
               Déconnexion
@@ -124,4 +132,3 @@ export function Navbar() {
     </nav>
   );
 }
-
