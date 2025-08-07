@@ -6,17 +6,23 @@ const Card = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement> & { asChild?: boolean }
 >(({ className, asChild = false, ...props }, ref) => {
   const Comp = asChild ? React.Fragment : "div";
+
+  // Si c’est un Fragment, on ne passe pas le ref
+  if (asChild) {
+    return (
+      <Comp {...props} className={cn("rounded-lg border border-gray-200 bg-white shadow-sm", className)} />
+    );
+  }
+
   return (
     <Comp
-      className={cn(
-        "rounded-lg border border-gray-200 bg-white shadow-sm",
-        className
-      )}
       ref={ref}
       {...props}
+      className={cn("rounded-lg border border-gray-200 bg-white shadow-sm", className)}
     />
   );
 });
+
 Card.displayName = "Card";
 
 export { Card };
