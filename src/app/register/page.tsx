@@ -34,7 +34,7 @@ export default function RegisterPage() {
     e.preventDefault();
     const { data, error } = await supabase.auth.signUp({
       email: form.email || undefined,
-      phone: form.phone || undefined,
+      phone: form.phone || "",
       password: form.password,
     });
     if (error) {
