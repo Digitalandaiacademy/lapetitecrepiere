@@ -18,7 +18,7 @@ interface CommentType {
 export default function ProductPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) {
   const { supabase, user } = useSupabase();
   const { addToCart } = useCart();
@@ -34,7 +34,7 @@ export default function ProductPage({
   const [productId, setProductId] = useState<string | null>(null);
 
   useEffect(() => {
-    params.then(({ id }) => setProductId(id));
+    setProductId(params.id);
   }, [params]);
 
   useEffect(() => {
